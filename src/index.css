@@ -1,32 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --bg: #0D0F0C;
+  --bg-soft: #11140F;
+  --surface: #161914;
+  --surface-2: #1E2219;
+  --surface-3: #262B1F;
+  --line: #2A2F23;
+  --line-soft: #1F231A;
+  --ink: #F3F1E7;
+  --ink-dim: #9A9C8C;
+  --ink-faint: #686A5C;
+  --maize: #E8A13A;
+  --maize-ink: #2A1B05;
+  --maize-dim: #3A2B14;
+  --husk: #C97A3C;
+  --good: #74AE70;
+  --good-dim: #1F2E1C;
+  --warn: #E0C04A;
+  --warn-dim: #332C16;
+  --danger: #D26A57;
+  --danger-dim: #34201B;
+  --teal: #5B9088;
+  --violet: #7A85AC;
+  --shadow-1: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-2: 0 16px 36px -14px rgba(0,0,0,.6);
+  --shadow-glow: 0 0 0 1px rgba(232,161,58,.18), 0 8px 24px -8px rgba(232,161,58,.18);
+  --shadow-pop: 0 14px 32px -10px rgba(0,0,0,.55);
+}
+
+[data-theme="light"] {
+  --bg: #F2EFE3;
+  --bg-soft: #EAE6D6;
+  --surface: #FFFFFF;
+  --surface-2: #FBFAF3;
+  --surface-3: #F1EEE0;
+  --line: #E1DCC8;
+  --line-soft: #EAE6D6;
+  --ink: #1C1D14;
+  --ink-dim: #5B5D4C;
+  --ink-faint: #8C8D7A;
+  --maize-ink: #FFFFFF;
+  --maize-dim: #FBE6BE;
+  --good-dim: #E2EFDF;
+  --warn-dim: #FAF1D2;
+  --danger-dim: #F7E3DD;
+  --shadow-1: 0 1px 2px rgba(30,25,10,.07);
+  --shadow-2: 0 16px 36px -16px rgba(30,25,10,.18);
+  --shadow-glow: 0 0 0 1px rgba(201,138,30,.18), 0 8px 24px -8px rgba(201,138,30,.18);
+  --shadow-pop: 0 14px 32px -12px rgba(30,25,10,.25);
+}
+
 @theme {
-  --color-bg: #0D0F0C;
-  --color-bg-soft: #11140F;
-  --color-surface: #161914;
-  --color-surface-2: #1E2219;
-  --color-surface-3: #262B1F;
-  --color-line: #2A2F23;
-  --color-ink: #F3F1E7;
-  --color-ink-dim: #9A9C8C;
-  --color-ink-faint: #686A5C;
-  --color-maize: #E8A13A;
-  --color-husk: #C97A3C;
-  --color-good: #74AE70;
-  --color-warn: #E0C04A;
-  --color-danger: #D26A57;
-  --color-teal: #5B9088;
-  --color-violet: #7A85AC;
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-maize: var(--maize);
+  --color-maize-ink: var(--maize-ink);
+  --color-maize-dim: var(--maize-dim);
+  --color-husk: var(--husk);
+  --color-good: var(--good);
+  --color-good-dim: var(--good-dim);
+  --color-warn: var(--warn);
+  --color-warn-dim: var(--warn-dim);
+  --color-danger: var(--danger);
+  --color-danger-dim: var(--danger-dim);
+  --color-teal: var(--teal);
+  --color-violet: var(--violet);
 
   --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 body {
-  background-color: #0D0F0C;
-  color: #F3F1E7;
+  background-color: var(--bg);
+  color: var(--ink);
   font-family: "IBM Plex Sans", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbars */
@@ -38,9 +96,22 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A2F23;
+  background: var(--line);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #686A5C;
+  background: var(--ink-faint);
+}
+
+/* Custom Jagged ticket edge */
+.ticket-jagged::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 14px;
+  background-image: radial-gradient(circle, var(--bg) 3.4px, transparent 3.6px);
+  background-size: 18px 18px;
+  background-position: 6px -7px;
 }
