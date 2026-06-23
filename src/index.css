@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0D0F0C;
+  --color-bg-soft: #11140F;
+  --color-surface: #161914;
+  --color-surface-2: #1E2219;
+  --color-surface-3: #262B1F;
+  --color-line: #2A2F23;
+  --color-ink: #F3F1E7;
+  --color-ink-dim: #9A9C8C;
+  --color-ink-faint: #686A5C;
+  --color-maize: #E8A13A;
+  --color-husk: #C97A3C;
+  --color-good: #74AE70;
+  --color-warn: #E0C04A;
+  --color-danger: #D26A57;
+  --color-teal: #5B9088;
+  --color-violet: #7A85AC;
+
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  background-color: #0D0F0C;
+  color: #F3F1E7;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2F23;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #686A5C;
+}
