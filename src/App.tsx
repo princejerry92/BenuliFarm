@@ -1037,6 +1037,7 @@ export default function App() {
               onUpdateExpenses={setExpenses}
               triggerToast={triggerToast}
               onExportExpensesCSV={handleExportExpensesCSV}
+              onOpenAddExpense={() => setIsAddExpenseOpen(true)}
             />
           )}
 
@@ -1217,6 +1218,82 @@ export default function App() {
         onCloseAddSite={() => setIsAddSiteOpen(false)}
         onAddSiteSubmit={handleAddSiteSubmit}
       />
+
+      {/* 4.5 FLOATING SPEED DIAL QUICK ACTIONS BUTTON (FAB) */}
+      {isLoggedIn && (
+        <div className="fixed bottom-24 lg:bottom-8 right-6 z-50 flex flex-col items-end gap-3.5">
+          {/* Backdrop Overlay when active */}
+          {isFabOpen && (
+            <div 
+              onClick={() => setIsFabOpen(false)} 
+              className="fixed inset-0 z-40 bg-[#0D0F0C]/60 backdrop-blur-sm cursor-pointer"
+            />
+          )}
+
+          {/* Speed Dial Menu Items */}
+          {isFabOpen && (
+            <div className="flex flex-col items-end gap-2.5 z-50 animate-scale-in">
+              {/* Log Expense Choice */}
+              <button
+                onClick={() => {
+                  setIsAddExpenseOpen(true);
+                  setIsFabOpen(false);
+                }}
+                className="flex items-center gap-3 bg-surface-3 border border-line hover:border-maize/50 hover:bg-surface-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xl transition-all group cursor-pointer"
+              >
+                <span className="text-ink-dim group-hover:text-white transition-colors">Log expense</span>
+                <div className="w-8 h-8 rounded-lg bg-surface-2 border border-line flex items-center justify-center text-maize group-hover:scale-105 transition-transform">
+                  <Receipt className="w-4 h-4" />
+                </div>
+              </button>
+
+              {/* Log Production Choice */}
+              <button
+                onClick={() => {
+                  setIsAddProductionOpen(true);
+                  setIsFabOpen(false);
+                }}
+                className="flex items-center gap-3 bg-surface-3 border border-line hover:border-maize/50 hover:bg-surface-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xl transition-all group cursor-pointer"
+              >
+                <span className="text-ink-dim group-hover:text-white transition-colors">Log production</span>
+                <div className="w-8 h-8 rounded-lg bg-surface-2 border border-line flex items-center justify-center text-maize group-hover:scale-105 transition-transform">
+                  <FileText className="w-4 h-4" />
+                </div>
+              </button>
+
+              {/* Log Intake Choice */}
+              <button
+                onClick={() => {
+                  setIsAddStockOpen(true);
+                  setIsFabOpen(false);
+                }}
+                className="flex items-center gap-3 bg-surface-3 border border-line hover:border-maize/50 hover:bg-surface-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xl transition-all group cursor-pointer"
+              >
+                <span className="text-ink-dim group-hover:text-white transition-colors">Log intake</span>
+                <div className="w-8 h-8 rounded-lg bg-surface-2 border border-line flex items-center justify-center text-maize group-hover:scale-105 transition-transform">
+                  <Warehouse className="w-4 h-4" />
+                </div>
+              </button>
+            </div>
+          )}
+
+          {/* Main FAB Trigger Button */}
+          <button
+            onClick={() => setIsFabOpen(!isFabOpen)}
+            className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 z-50 cursor-pointer ${
+              isFabOpen 
+                ? 'bg-maize text-maize-ink rotate-45 scale-105' 
+                : 'bg-maize text-maize-ink hover:scale-105 hover:rotate-90'
+            }`}
+          >
+            {isFabOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Plus className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+      )}
 
       {/* 5. FLOATING LIVE TOAST POPUPS NOTIFICATION HUD */}
       <div className="fixed bottom-20 lg:bottom-5 right-5 space-y-2.5 z-50 max-w-sm w-full pointer-events-none">

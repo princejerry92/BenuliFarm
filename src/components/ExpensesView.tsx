@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Download, Upload, Check, FileText } from 'lucide-react';
+import { Search, Download, Upload, Check, FileText, Plus } from 'lucide-react';
 import { Expense } from '../data';
 
 interface ExpensesViewProps {
@@ -7,13 +7,15 @@ interface ExpensesViewProps {
   onUpdateExpenses: (updater: (prev: Expense[]) => Expense[]) => void;
   triggerToast: (type: 'success' | 'warn' | 'danger' | 'info', title: string, desc?: string) => void;
   onExportExpensesCSV: () => void;
+  onOpenAddExpense: () => void;
 }
 
 export const ExpensesView: React.FC<ExpensesViewProps> = ({
   expenses,
   onUpdateExpenses,
   triggerToast,
-  onExportExpensesCSV
+  onExportExpensesCSV,
+  onOpenAddExpense
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDept, setSelectedDept] = useState<string>('all');
@@ -106,6 +108,13 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
           <p className="text-xs text-ink-dim mt-0.5">Every operational naira out the door, by department and date.</p>
         </div>
         <div className="flex gap-2">
+          <button 
+            onClick={onOpenAddExpense}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-maize text-maize-ink hover:bg-opacity-95 rounded-xl text-xs font-black transition-all shadow-md cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Log Expense</span>
+          </button>
           <label className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-2 hover:bg-surface-3 border border-line hover:text-white rounded-xl text-xs font-semibold transition-all shadow-sm cursor-pointer">
             <Upload className="w-3.5 h-3.5" />
             <span>Import CSV</span>
@@ -162,8 +171,15 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
         {/* Expenses Table */}
         <div className="overflow-x-auto pt-2">
           {filteredExpenses.length === 0 ? (
-            <div className="text-center py-12 text-ink-faint text-xs">
-              No matching expense records found.
+            <div className="text-center py-12 text-ink-faint text-xs flex flex-col items-center gap-3">
+              <span>No matching expense records found.</span>
+              <button 
+                type="button" 
+                onClick={onOpenAddExpense}
+                className="px-4 py-2 bg-surface-2 border border-line rounded-xl text-ink font-bold hover:bg-surface-3 hover:text-white transition-all cursor-pointer"
+              >
+                Log New Operating Expense
+              </button>
             </div>
           ) : (
             <table className="w-full text-left border-collapse text-xs font-semibold min-w-[700px]">
